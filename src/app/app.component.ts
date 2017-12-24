@@ -16,18 +16,6 @@ export class AppComponent implements OnInit{
   
   ngOnInit(){
 	  
-	  
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-  });
-
-  $('#login,#update,#register,#about,#profilename,#dashboard').click(function(e)
-{
-  e.preventDefault();
-  $("#wrapper").toggleClass("toggled");
-});
-
 
 	  
   }

@@ -1,0 +1,29 @@
+<div class="jumbotron">
+    <h3>Click accept to help the victim</h3>
+</div>
+
+<agm-map [mapTypeId]="maptype" [zoom]="17" [latitude]="19.114977" [longitude]="73.0113671" >
+  <agm-marker [label]="location.accept ? acceptLabel : (location.victim ? victimLabel : (location.you ? youLabel : ''))"  *ngFor="let location of locations" [latitude]="location.latitude" [longitude]="location.longitude" >
+   </agm-marker>
+</agm-map>
+
+<br>
+<br>
+
+<div style="text-align:center">
+	<button (click)="reply(true)" class="btn btn-primary">Accept</button>
+	<button (click)="reply(false)" class="btn btn-primary">Reject </button>
+</div>
+
+<br>
+<br>
+<br>
+<!--
+<div *ngIf="locations?.length > 0;else noItems">
+	<ul *ngFor="let location of locations">
+		<li>{{location.latitude}}</li>
+		<li>{{location.longitude}}</li>
+	</ul>
+</div>
+
+-->

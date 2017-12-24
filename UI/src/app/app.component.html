@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <body style="background:#F1F1F1;">
+
+    <!-- Navbar-->
+    <nav class="navbar  navbar-light" style="background-color:#C50000;">
+        <button  style="background-color:#FFFDEF;" class="navbar-toggler navbar-toggler-right" type="button"  id="menu-toggle"data-target="#menu-toggle" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" style="color:#FFFDEF">GHR-1</a>
+      </nav>
+    <!--navbar ends-->
+
+ <!--Side  Navbar-->
+ 
+      <div id="wrapper">
+                  <!-- Sidebar -->
+                  <div id="sidebar-wrapper">
+                      <ul class="sidebar-nav">
+                          <li class="sidebar-brand">
+                              <a href="#" id="profilename">
+                                  Username
+                              </a>
+                          </li>
+                          <li>
+                              <a id="register" routerLink="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;&nbsp;Register</a>
+                          </li>
+                          <li>
+                              <a id="login" routerLink="/login">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;Login
+                              </a>         
+                          </li>
+                          <li>
+                              <a routerLink="/dashboard" id="dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i>&nbsp;&nbsp;Dashboard</a>
+                          </li>
+                          <li>
+                              <a href="#" id="update"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;Settings</a>
+                          </li>
+                          <li>
+                              <a href="#" id="about"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Logout</a>
+                          </li>
+                          <li>
+                              <a href="#" id="about"><i class="fa fa-sticky-note" aria-hidden="true"></i>&nbsp;&nbsp;About-us</a>
+                          </li>
+                         
+                      </ul>
+                  </div>
+                  <!-- /#sidebar-wrapper -->
+          
+                  <!-- Page Content -->
+                  <div id="page-content-wrapper">
+                      
+                     
+                          <router-outlet></router-outlet>
+                        
+                       
+                  </div>
+                  <!-- /#page-content-wrapper -->
+              </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  </body>
+</html>

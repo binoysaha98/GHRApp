@@ -1,0 +1,34 @@
+
+<form>
+	<h1>Registration</h1>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Username (optional)</label>
+    <input name="username" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label for="exampleSelect1">User Type</label>
+    <select name="userType" class="form-control" id="exampleSelect1">
+      <option>Doctor</option>
+      <option>Ambulance</option>
+      <option>Police</option>
+      <option value="none">None of the above</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="Email">Email (optional)</label>
+    <input name="email" type="text" class="form-control" id="Email" placeholder="Email Address">
+  </div>
+  <div class="form-group">
+    <label for="Phone">Phone number</label>
+    <input name="phone" type="text" class="form-control" id="Phone" placeholder="Phone number">
+  </div>
+  <button (click)="register('email')" id='email'  class="btn btn-primary" >Register via Email</button>
+  <button (click)="register('phone')" id='phone' class="btn btn-primary" >Register via Phone number</button>
+
+</form>
+<br/>
+<br/>

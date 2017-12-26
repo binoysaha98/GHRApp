@@ -13,7 +13,7 @@ export class RemediesService {
   getRemedy(value:String)
   {
 	  
-		this.geturl='http://localhost:3000/remedies';
+		this.geturl='https://secure-sea-22568.herokuapp.com/remedies';
 		var headers = new Headers();
 	    headers.append("content-type","application/json");
 		var data = {

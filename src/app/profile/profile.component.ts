@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
 	this.route.params.subscribe(number => {
 	  this.number = number;
-	  console.log(this.number);
 	  this.ds.getSpecifiedUser(this.number).subscribe(res => {
 		 this.user = res.user[0];
 	  });

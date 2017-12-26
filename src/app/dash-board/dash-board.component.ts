@@ -9,15 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./dash-board.component.css']
 })
 export class DashBoardComponent implements OnInit {
-
+	doctor;
+	registerToken;
 	num : string;
+	notification;
   constructor(private chatService : ChatService,private ds : DataService,private router : Router) {
 	
   }
 
   ngOnInit() {
-		
+	if(localStorage.getItem('registerToken') == null){
+		this.chatService.getPermission();
+		this.chatService.receiveMessage();
+		this.notification = this.chatService.currentMessage;
 	}
+  }
  	
 	ChatRoom(){	
 		/*console.log('chat room created');
@@ -29,7 +35,7 @@ export class DashBoardComponent implements OnInit {
 	}
 	
 	Ambulance(){
-		this.router.navigate(['/acceptReject']);
+		this.router.navigate(['/ambulance-requests']);
 		/*console.log('Ambulance montitoring switched on');
 		this.chatService.createAmbulance('9922129496');*/
 	}

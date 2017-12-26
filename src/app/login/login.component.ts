@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {DataService} from '../data-service.service';
-
+declare var $ : any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,39 +9,42 @@ import {DataService} from '../data-service.service';
 })
 export class LoginComponent implements OnInit {
 
-  rForm: FormGroup;
-  post:any; 
-  titleAlert:string = 'This field is required';
-  
-  constructor(private fb: FormBuilder,private router : Router,private dataService : DataService) {
+  constructor(private router : Router,private dataService : DataService) {
 	
-	this.rForm = fb.group({
-      'text' : [null],
-      'pass' : [null, Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(500)])]
-    });
 	
   }
 	ngOnInit() {
-		
-  }
-  
-   login(post) {
-	   
-	   var user = {
-		   email : post.text,
-		   pass : post.pass,
-	  };
-	   
-		this.dataService.authenticateUser(user).subscribe(result => {
-			if(result.result == 'success'){
-				localStorage.setItem('token',result.token);
-				this.router.navigate(['dashboard']);
+		var number;
+		var pass;
+		var ref = this.dataService;
+		var rtr = this.router;
+	$("button[name='submit']").click(function(){
+		number = $("input[name='phone']").val();
+		pass = $("input[name='password']").val();
+		var regex1= /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
+		var flag = regex1.test(number);
+		if(flag == false){
+			alert("Invalid Phone number");
+		}else{
+			if(pass.length < 10){
+				alert("Invalid Password");
 			}
 			else{
-				alert(result.message);
+				const user = {
+					number : number,
+					pass : pass
+				}
+				ref.authenticateUser(user).subscribe(res => {
+					if(res.result == 'failure'){
+						alert("Either the password or the number is incorrect");
+					}else{
+						localStorage.setItem('token',res.token);
+						rtr.navigate(['/dashboard']);
+					}
+				});
 			}
-		});
-		
+		}
+	});	
   }
-
+  
 }

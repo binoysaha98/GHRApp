@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
 		   });  
 		   }
 		   else{
-			 this.dataService.addUserPhone(this.user).subscribe((result) => {
+			 this.dataService.addUser(this.user).subscribe((result) => {
 			   if(result.result == "failure"){
 				   this.verify = false;
 				alert('This Phone number is already taken');

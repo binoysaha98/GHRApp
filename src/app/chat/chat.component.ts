@@ -30,7 +30,7 @@ export class ChatComponent implements OnInit {
 	this.route.params.subscribe(params => {
        this.number = params['id']; // (+) converts string 'id' to a number
 		this.ds.getUser().subscribe(res => {
-			if(res.data.user[0].doctor != 'YES' && this.number != res.data.user[0].number){
+			if(res.data.user[0].userType != 'Doctor' && this.number != res.data.user[0].number){
 				alert('You cant access this page');
 				this.router.navigate(['/chatRooms']);
 			}
@@ -80,30 +80,12 @@ export class ChatComponent implements OnInit {
 	  });
 	*/
 	
-	this.chatService.getPermission();
-	this.chatService.receiveMessage();
-    this.notification = this.chatService.currentMessage;
-	
-	if(localStorage.getItem('registerToken') != null){
-		 this.registerToken = localStorage.getItem('registerToken');
-			console.log(localStorage.getItem('registerToken'));
-			this.ds.getUser().subscribe(result => {
-			this.doctor = result.data.user[0].doctor;
-			console.log(this.doctor);
-			var data = {
-				doctor : this.doctor,
-				registerToken : this.registerToken
-			}
-			this.ds.subscribeTopic(data).subscribe(res => {
-				console.log(res);
-			});
-			});
-		}
 		
 	/*this.chatService.getPosition().subscribe((pos: Position) => {
 		alert(pos.coords.latitude);
 		alert(pos.coords.longitude);
 	});*/
+	
 	
 	}
   profile(username : string){

@@ -8,7 +8,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth }     from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import 'rxjs/add/operator/take';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { DataService } from './data-service.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 interface Item {
 	id : string;
 	name : string;
@@ -22,7 +23,7 @@ export class ChatService {
 	locations : Observable<Location[]>;
 	d;
 	data;
-  constructor( private database : AngularFirestore,private db: AngularFireDatabase, private afAuth: AngularFireAuth ) {
+  constructor(private ds : DataService,private database : AngularFirestore,private db: AngularFireDatabase, private afAuth: AngularFireAuth ) {
 	this.d = this.database.collection('database');
 	this.data = this.d.valueChanges();
 	/*this.itemsCollection = this.database.collection('chat');
@@ -31,6 +32,31 @@ export class ChatService {
 	this.locations = this.locationCollection.valueChanges();*/
 		
   }
+  getVictimLocation(number : string){
+	 return this.d.doc(number).collection('ambulances').doc(number).valueChanges();
+  }
+	addLocation(number : string,currentNumber : string){
+		navigator.geolocation.getCurrentPosition((position) => {
+			const loc = {
+				latitude : position.coords.latitude,
+				longitude : position.coords.longitude
+			};
+			this.d.doc(number).collection('ambulances').doc(currentNumber).update(loc,{ create : true });
+		});
+	}
+	
+	getLocations(number : string){
+		return this.d.doc(number).collection('ambulances').valueChanges();
+	} 
+	notifyAmbulance(number : string, lat : Number, lon : Number){
+		const victimLocation : Location = {
+			latitude : lat,
+			longitude : lon,
+			victim : 'YES'
+		}
+		const docref = this.d.doc(number);
+		docref.collection('ambulances').doc(number).set(victimLocation);
+	}
 	
 	addMessage(docId : string, messenger : string , message : string,msgNo : Number){
 		const data : Chat = {
@@ -68,20 +94,16 @@ export class ChatService {
 		});
 	}
 	
-	getLocations(){
-		return this.locations;
-	} 
 	
 	getLocationByid(id : string){
 	  return this.locationCollection.doc(id).valueChanges();
 	  }
 	
-	insertAccept(id:string){
-		this.database.doc<any>('ambulance-locations/'+id).update({
-			accept: 'yes'
-		}).catch((err)=>{
-			console.log('Error');
-		});
+	insertAccept(number:string,currentUser : string){
+		this.d.doc(number).collection('ambulances').doc(currentUser).update({accept : 'YES'});
+	}
+	insertReject(number:string,currentUser : string){
+		this.d.doc(number).collection('ambulances').doc(currentUser).update({reject : 'YES'});
 	}
 	
 	updateLocation(id:string,lat: number,lon : number)
@@ -120,8 +142,20 @@ export class ChatService {
       })
       .then(token => {
         localStorage.setItem('registerToken',token);
+		if(localStorage.getItem('registerToken') != null){
+					this.ds.getUser().subscribe(result => {
+					var data = {
+						userType : result.data.user[0].userType,
+						registerToken : localStorage.getItem('registerToken')
+					};
+					this.ds.subscribeTopic(data).subscribe(res => {
+						console.log(res);
+					});
+					});
+				}	
+			}
 	   //this.updateToken(token)
-      })
+      )
       .catch((err) => {
         console.log('Unable to get permission to notify.', err);
       });

@@ -7,8 +7,9 @@ export interface Chat {
 export interface Location {
 	id?: string;
 	accept?: string;
-	latitude : number;
-	longitude : number;
+	latitude : Number;
+	longitude : Number;
 	victim? : string;
 	you? : string;
+	reject? : string;
 }

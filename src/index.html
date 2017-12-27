@@ -10,7 +10,16 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARMHHhqYp5BDrAh3QtK-CNZHms4pP-p-o&libraries=places"></script>
-  </head>
+	
+  <script>
+  if('serviceWorker' in navigator) {
+	  navigator.serviceWorker
+			   .register('./firebase-messaging-sw.js')
+			   .then(function() { console.log("Service Worker Registered"); });
+	}
+  </script>
+	
+ </head>
 
 <body style="background:#F1F1F1;">
   <app-root></app-root>
